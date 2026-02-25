@@ -4,7 +4,7 @@ use logos::Logos;
 
 #[derive(Logos, Debug, PartialEq)]
 pub enum Tokens {
-    #[regex(r"[^\*\[\]\(\):]+", |lex| lex.slice().to_string())]
+    #[regex(r"[^\*\[\]\(\):\\]+", |lex| lex.slice().to_string())]
     TEXT(String),
 
     #[token("*")]
@@ -24,6 +24,9 @@ pub enum Tokens {
 
     #[token(":")]
     COLON,
+
+    #[token("\\")]
+    BACKSLASH,
 }
 
 pub fn tokenise(content: &str) -> Vec<Tokens> {
